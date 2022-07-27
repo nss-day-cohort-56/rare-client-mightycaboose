@@ -24,9 +24,9 @@ export const PostList = () => {
         [] // When this array is empty, you are observing initial component state
     )
 
-  
+
     return <>
-       
+
     <h2>Your Posts</h2>
 
     
@@ -35,12 +35,12 @@ export const PostList = () => {
         {
             posts.map(
                 (post) => {
-                    return <section key={post.id} className="post">
-                        <Link to={`/posts/${post.id}/edit`}> {post.label}</Link>
-                        <div>{post.label}</div>
-                        <img src={post.image_url} alt={post.label}></img>
+                    return <section className="post" key={`post--${post.id}`}>
+                        {/* <Link to={`/posts/${post.id}/edit`}> {post.label}</Link> */}
+                        <div>{post.title}</div>
+                        <img src={post.image_url} alt={post.title}></img>
                         <footer>
-                        <DeleteButton post={post} get={getPosts}/> 
+                        {/* <DeleteButton post={post} get={getPosts}/>  */}
                     </footer>
                     </section>
                 }
