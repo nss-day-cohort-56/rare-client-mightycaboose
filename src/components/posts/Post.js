@@ -34,12 +34,12 @@ export const Post = ({ post, reaction, onEditButtonClick, onDeleteButtonClick })
         <div className="buttons">
             <button className={`button ${getMessageType()} is-outlined`} onClick={
             () => {
-                onEditButtonClick(entry.id)
+                onEditButtonClick(post.id)
             }
             }>Edit</button>
             <button className={`button ${getMessageType()}`} onClick={
             () => {
-                onDeleteButtonClick(entry.id)
+                onDeleteButtonClick(post.id)
             }
             }>Delete</button>
         </div>
