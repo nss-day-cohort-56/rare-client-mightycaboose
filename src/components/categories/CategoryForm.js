@@ -19,7 +19,7 @@ export const CategoryForm = () => {
 return <>
     <input type="text" name="category" required value={updatedCategory.label} onChange={handleUpdateCategory} />
     <button className="submitNewCategoryB" type="submit"
-        onClick={() => {addCategory(updatedCategory).then(navigate("/categories"))}}>Save</button>
+        onClick={() => {addCategory(updatedCategory).then(() => navigate("/categories"))}}>Save</button>
 </>
 }
 
