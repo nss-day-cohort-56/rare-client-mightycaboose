@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
+import { CategoryForm } from "../components/categories/CategoryForm"
 import { CategoryList } from "../components/categories/CategoryList"
 import { Authorized } from "./Authorized"
 import { PostList } from "../components/posts/postList"
@@ -14,6 +15,8 @@ export const ApplicationViews = ({ token, setToken }) => {
       {<Route path="/all_posts" element={<PostList />}/>}
         {/* Add Routes here */}
         <Route path="/categories" element={<CategoryList/>} />
+        <Route path="/categories/new" element={<CategoryForm/>} />
+
       </Route>
     </Routes>
   </>
