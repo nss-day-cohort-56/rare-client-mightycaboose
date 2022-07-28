@@ -27,7 +27,7 @@ export const PostList = () => {
 
     return <>
 
-    <h2>Your Posts</h2>
+    <h2>All Posts</h2>
 
     
 
