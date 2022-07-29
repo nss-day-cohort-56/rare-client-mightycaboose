@@ -12,6 +12,7 @@ export const CategoryList = () => {
     const [categoryId, setCategoryId] = useState(0);
     const [updatedCategory, setUpdatedCategories] = useState({
         label: ""})
+
     const handleDeleteClick = (id) => {
         setDeleteActive(true)
         setCategoryId(id)
@@ -60,7 +61,7 @@ export const CategoryList = () => {
                         <p className="modal-card-title">Delete Category?</p>
                     </header>
                     <section className="modal-card-body">
-                        Are you sure you want to delete this category
+                        Are you sure you want to delete this category?
                     </section>
                     <footer className="modal-card-foot">
                         <button className="button is-success" onClick={() => {
