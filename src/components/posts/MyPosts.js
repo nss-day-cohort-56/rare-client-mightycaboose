@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+
 //import { DeleteButton } from "./DeleteButton"
 
 
-export const PostList = () => {
+export const MyPosts = ({token}) => {
     const [posts, setPosts] = useState([])
     const navigate = useNavigate()
-    const [filteredPosts, setFiltered] = useState([])
+    const [filteredPosts, setFilteredPosts] = useState([])
 
 
     const getPosts = () => {
-        fetch(`http://localhost:8088/posts`)
+        fetch(`http://localhost:8088/posts?q=${token}`)
         .then(response => response.json())
         .then((postArray) => {
             setPosts(postArray)
@@ -24,10 +25,18 @@ export const PostList = () => {
         [] // When this array is empty, you are observing initial component state
     )
 
+    // useEffect(
+    //     () => {
+    //         const myPosts = post.filter(post => post.user_id === parseInt(token))
+    //             setFilteredPosts(myPosts)
+    //     },
+    //     [posts] // When this array is empty, you are observing initial component state
+    // )
+
 
     return <>
 
-    <h2>All Posts</h2>
+    <h2>My Posts</h2>
 
     
 
