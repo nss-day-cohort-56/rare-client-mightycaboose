@@ -8,6 +8,7 @@ import { PostList } from "../components/posts/postList"
 import { MyPosts } from "../components/posts/MyPosts"
 import { TagForm } from "../components/tags/TagForm"
 import { TagList } from "../components/tags/TagList"
+import { PostEdit } from "../components/posts/PostEdit"
 
 export const ApplicationViews = ({ token, setToken }) => {
   return <>
@@ -23,9 +24,10 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/tags/new" element={<TagForm/>} />
         <Route path="/tags" element={<TagList/>} />
 
+      <Route path="/posts/:postId/edit" element={<PostEdit/>} />
       </Route>
     </Routes>
   </>
 }
 
-//MyPosts token={token} }
+//MyPosts token={token} 
