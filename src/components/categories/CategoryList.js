@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { getCategories, deleteCategory } from "../../managers/CategoriesManager"
+import { getCategories, deleteCategory, updateCategory } from "../../managers/CategoriesManager"
 
 
 export const CategoryList = () => {
@@ -10,16 +10,23 @@ export const CategoryList = () => {
     const [editActive, setEditActive] = useState(false);
     const [deleteActive, setDeleteActive] = useState(false);
     const [categoryId, setCategoryId] = useState(0);
-
+    const [updatedCategory, setUpdatedCategories] = useState({
+        label: ""})
     const handleDeleteClick = (id) => {
         setDeleteActive(true)
         setCategoryId(id)
     }
 
-    const handleEditClick = () => {
-        /*
+    const handleEditClick = (id) => {
+        setEditActive(true)
+        setCategoryId(id)
+    }
 
-       */
+    //Updates state when user types input
+    const handleUpdateCategory = (event) => {
+        const copy = {...updatedCategory} 
+        copy.label = event.target.value 
+        setUpdatedCategories(copy)
     }
 
     useEffect(
@@ -27,6 +34,13 @@ export const CategoryList = () => {
             getCategories().then(setCategories)
         }, []
     )
+    
+    useEffect(
+        () => {
+            getCategories().then(setCategories)
+        }, [editActive, deleteActive]
+    )
+    
     return (
         <>
             <h1>Categories</h1>
@@ -34,7 +48,7 @@ export const CategoryList = () => {
             {categories.map(category => {
                 return <>
                     <div>
-                        <button onClick={() => { setEditActive(true) }}>Edit</button>
+                        <button onClick={() => { handleEditClick(category.id) }}>Edit</button>
                         <button onClick={() => { handleDeleteClick(category.id) }}>Delete</button>
                         {category.label}</div>
                 </>
@@ -50,9 +64,32 @@ export const CategoryList = () => {
                     </section>
                     <footer className="modal-card-foot">
                         <button className="button is-success" onClick={() => {
-                            deleteCategory(categoryId).then(() => { setDeleteActive(false) })
+                            deleteCategory(categoryId).then(() => {
+                                setDeleteActive(false)
+                                setCategoryId(0)
+                            })
                         }}>Delete</button>
                         <button className="button" onClick={() => { setDeleteActive(false) }}>Cancel</button>
+                    </footer>
+                </div>
+            </div>
+
+            <div className={editActive ? "modal is-active" : "modal"}>
+                <div className="modal-background"></div>
+                <div className="modal-card">
+                    <header className="modal-card-head">
+                        <p className="modal-card-title">Edit Category</p>
+                    </header>
+                    <input type="text" name="category" required value={updatedCategory.label} onChange={handleUpdateCategory} />
+                    <footer className="modal-card-foot">
+                        <button className="button is-success" onClick={() => {
+                            updateCategory(categoryId, updatedCategory).then(() => {
+                                setEditActive(false)
+                                setUpdatedCategories({
+                                    label: ""})
+                            })
+                        }}>Save</button>
+                        <button className="button" onClick={() => { setEditActive(false) }}>Cancel</button>
                     </footer>
                 </div>
             </div>
@@ -78,3 +115,23 @@ export const CategoryList = () => {
     //                 </footer>
     //             </div>
     //         </div>
+
+
+
+    /*   const [updatedCategory, setUpdatedCategories] = useState({
+        label: ""})
+    const navigate = useNavigate()
+
+//Updates state when user types input
+    const handleUpdateCategory = (event) => {
+        const copy = {...updatedCategory} 
+        copy.label = event.target.value 
+        setUpdatedCategories(copy)
+    }
+
+//Button posts new object to category in database then navigates to category list
+return <>
+    <input type="text" name="category" required value={updatedCategory.label} onChange={handleUpdateCategory} />
+    <button className="submitNewCategoryB" type="submit"
+        onClick={() => {addCategory(updatedCategory).then(() => navigate("/categories"))}}>Save</button>
+</> */
