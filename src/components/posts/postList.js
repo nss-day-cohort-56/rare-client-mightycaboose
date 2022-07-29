@@ -38,7 +38,10 @@ export const PostList = () => {
                     return <section className="post" key={`post--${post.id}`}>
                         {/* <Link to={`/posts/${post.id}/edit`}> {post.label}</Link> */}
                         <div>{post.title}</div>
-                        <img src={post.image_url} alt={post.title}></img>
+                        <div>{post.publication_date}</div>
+                        <div>{post.category.label}</div>
+                        <div>{post.user.first_name}</div>
+                        <div>{post.user.last_name}</div>
                         <footer>
                         {/* <DeleteButton post={post} get={getPosts}/>  */}
                     </footer>
@@ -51,3 +54,4 @@ export const PostList = () => {
     </article>
     </>
 }
+//titla author category date
