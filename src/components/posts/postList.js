@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 //import { DeleteButton } from "./DeleteButton"
 
 
-export const PostList = () => {
+export const PostList = ({setPostId}) => {
     const [posts, setPosts] = useState([])
     const navigate = useNavigate()
     const [filteredPosts, setFiltered] = useState([])
@@ -37,7 +37,10 @@ export const PostList = () => {
                 (post) => {
                     return <section className="post" key={`post--${post.id}`}>
                         {/* <Link to={`/posts/${post.id}/edit`}> {post.label}</Link> */}
-                        <div>{post.title}</div>
+                        <div>{post.title}<button onClick={() => {
+                            setPostId(post.id)
+                            navigate('/')
+                        }}>details...</button></div>
                         <img src={post.image_url} alt={post.title}></img>
                         <footer>
                         {/* <DeleteButton post={post} get={getPosts}/>  */}
