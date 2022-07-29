@@ -5,6 +5,7 @@ import { CategoryForm } from "../components/categories/CategoryForm"
 import { CategoryList } from "../components/categories/CategoryList"
 import { Authorized } from "./Authorized"
 import { PostList } from "../components/posts/postList"
+import { MyPosts } from "../components/posts/MyPosts"
 
 export const ApplicationViews = ({ token, setToken }) => {
   return <>
@@ -13,6 +14,7 @@ export const ApplicationViews = ({ token, setToken }) => {
       <Route path="/register" element={<Register setToken={setToken} />}  />
       <Route element={<Authorized token={token} />}>
       {<Route path="/all_posts" element={<PostList />}/>}
+      {<Route path="/my_posts" element={<MyPosts token={token}/>}/>} 
         {/* Add Routes here */}
         <Route path="/categories" element={<CategoryList/>} />
         <Route path="/categories/new" element={<CategoryForm/>} />
@@ -21,3 +23,5 @@ export const ApplicationViews = ({ token, setToken }) => {
     </Routes>
   </>
 }
+
+//MyPosts token={token} }
