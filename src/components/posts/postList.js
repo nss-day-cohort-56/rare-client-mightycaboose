@@ -41,7 +41,10 @@ export const PostList = ({setPostId}) => {
                             setPostId(post.id)
                             navigate('/')
                         }}>details...</button></div>
-                        <img src={post.image_url} alt={post.title}></img>
+                        <div>{post.publication_date}</div>
+                        <div>{post.category.label}</div>
+                        <div>{post.user?.first_name}</div>
+                        <div>{post.user?.last_name}</div>
                         <footer>
                         {/* <DeleteButton post={post} get={getPosts}/>  */}
                     </footer>
