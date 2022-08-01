@@ -10,8 +10,8 @@ export const MyPosts = ({token}) => {
     const [filteredPosts, setFilteredPosts] = useState([])
 
 
-    const getPosts = () => {
-        fetch(`http://localhost:8088/posts?q=${token}`)
+    const getMyPosts = (id) => {
+        fetch(`http://localhost:8088/posts?q=${id}`)
         .then(response => response.json())
         .then((postArray) => {
             setPosts(postArray)
@@ -20,7 +20,7 @@ export const MyPosts = ({token}) => {
     }
     useEffect(
         () => {
-            getPosts()
+            getMyPosts(token)
         },
         [] // When this array is empty, you are observing initial component state
     )
@@ -47,7 +47,10 @@ export const MyPosts = ({token}) => {
                     return <section className="post" key={`post--${post.id}`}>
                         {/* <Link to={`/posts/${post.id}/edit`}> {post.label}</Link> */}
                         <div>{post.title}</div>
-                        <img src={post.image_url} alt={post.title}></img>
+                        <div>{post.publication_date}</div>
+                        <div>{post.category.label}</div>
+                        <div>{post.user?.first_name}</div>
+                        <div>{post.user?.last_name}</div>
                         <footer>
                         {/* <DeleteButton post={post} get={getPosts}/>  */}
                     </footer>
@@ -56,7 +59,6 @@ export const MyPosts = ({token}) => {
             )
         }
 
-
-    </article>
+</article>
     </>
 }
